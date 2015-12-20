@@ -327,6 +327,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 947478332}
   - 82: {fileID: 947478331}
+  - 114: {fileID: 947478333}
   m_Layer: 0
   m_Name: Music Player
   m_TagString: Untagged
@@ -346,7 +347,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: .0689999983
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -404,6 +405,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &947478333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 947478330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44e7353fc808cf47a489303d2e9f838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995522706
 GameObject:
   m_ObjectHideFlags: 0
