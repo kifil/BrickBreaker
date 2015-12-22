@@ -5,8 +5,6 @@ public class MusicPlayer : MonoBehaviour {
 	
 	static MusicPlayer instance = null;
 	
-	static int musicPlayersCreated = 0;
-	
 //	public MusicPlayer(){
 //		musicPlayersCreated++;
 //		print ("musics: " + musicPlayersCreated);
