@@ -30,4 +30,13 @@ public class Ball : MonoBehaviour {
 	
 
 	}
+	
+	void OnCollisionEnter2D(Collision2D collision){
+		if(hasStarted){
+			Vector2 ballTweak = new Vector2(Random.Range(0.0f,0.2f),Random.Range(0.0f,0.2f));
+			rigidbody2D.velocity += ballTweak;
+			audio.Play();
+		}
+		
+	}
 }

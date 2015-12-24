@@ -3,24 +3,28 @@ using System.Collections;
 
 public class Brick : MonoBehaviour {
 
-	//public int maxHits;
+
 	public Sprite[] hitSprites;
+	public AudioClip crack;
+	//TODO this doesnt reset when teh game restarts
+	public static int breakableCount = 0;
 	
 	private LevelManager levelManager; 
 	private int timesHit = 0;
-	// Use this for initialization
+	private bool isBreakable;
+
 	void Start () {
+		isBreakable = (this.tag == "Breakable");
+		if(isBreakable){
+			breakableCount++;
+		}
+		
 		levelManager  = GameObject.FindObjectOfType<LevelManager>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	void OnCollisionEnter2D(Collision2D collision ){
-		bool isBreakable =(this.tag == "Breakable");
 		if(isBreakable){
+			AudioSource.PlayClipAtPoint(crack, transform.position, .3F);
 			HandleDamage();
 		}
 	}
@@ -30,6 +34,10 @@ public class Brick : MonoBehaviour {
 		//always 1 more hit than the number of damage stages added
 		int maxHits = hitSprites.Length + 1;
 		if(timesHit >= maxHits){
+			breakableCount--;
+			//message the level manager when a  brick is destroyed
+			levelManager.BrickDestroyed();
+			print (breakableCount);
 			Destroy(gameObject);
 		}
 		else{
