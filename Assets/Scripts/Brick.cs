@@ -22,9 +22,9 @@ public class Brick : MonoBehaviour {
 		levelManager  = GameObject.FindObjectOfType<LevelManager>();
 	}
 	
-	void OnCollisionEnter2D(Collision2D collision ){
+	void OnCollisionExit2D(Collision2D collision ){
 		if(isBreakable){
-			AudioSource.PlayClipAtPoint(crack, transform.position, .3F);
+            AudioSource.PlayClipAtPoint(crack, transform.position, 1F);
 			HandleDamage();
 		}
 	}
@@ -48,7 +48,7 @@ public class Brick : MonoBehaviour {
 	void PuffSmoke(){
 		GameObject smokePuff = Instantiate(smoke, new Vector3(this.transform.position.x, this.transform.position.y, 0f), Quaternion.identity)as GameObject;
 		
-		smokePuff.particleSystem.startColor = this.GetComponent<SpriteRenderer>().color;
+		smokePuff.GetComponent<ParticleSystem>().startColor = this.GetComponent<SpriteRenderer>().color;
 	}
 	
 	void UpdateSprite(){

@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour {
 			
 			if(Input.GetMouseButtonDown(0)){
 				hasStarted = true;
-				this.rigidbody2D.velocity = new Vector2(2.0f,15.0f);
+				this.GetComponent<Rigidbody2D>().velocity = new Vector2(2.0f,15.0f);
 				print ("mouse clicked");
 			}
 		
@@ -31,11 +31,11 @@ public class Ball : MonoBehaviour {
 
 	}
 	
-	void OnCollisionEnter2D(Collision2D collision){
+	void OnCollisionExit2D(Collision2D collision){
 		if(hasStarted){
 			Vector2 ballTweak = new Vector2(Random.Range(0.0f,0.2f),Random.Range(0.0f,0.2f));
-			rigidbody2D.velocity += ballTweak;
-			audio.Play();
+			GetComponent<Rigidbody2D>().velocity += ballTweak;
+			GetComponent<AudioSource>().Play();
 		}
 		
 	}
