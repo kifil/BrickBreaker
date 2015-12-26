@@ -6,8 +6,8 @@ public class Brick : MonoBehaviour {
 
 	public Sprite[] hitSprites;
 	public AudioClip crack;
-	//TODO this doesnt reset when teh game restarts
 	public static int breakableCount = 0;
+	public GameObject smoke;
 	
 	private LevelManager levelManager; 
 	private int timesHit = 0;
@@ -34,10 +34,10 @@ public class Brick : MonoBehaviour {
 		//always 1 more hit than the number of damage stages added
 		int maxHits = hitSprites.Length + 1;
 		if(timesHit >= maxHits){
+			PuffSmoke();
 			breakableCount--;
 			//message the level manager when a  brick is destroyed
 			levelManager.BrickDestroyed();
-			print (breakableCount);
 			Destroy(gameObject);
 		}
 		else{
@@ -45,10 +45,19 @@ public class Brick : MonoBehaviour {
 		}
 	}
 	
+	void PuffSmoke(){
+		GameObject smokePuff = Instantiate(smoke, new Vector3(this.transform.position.x, this.transform.position.y, 0f), Quaternion.identity)as GameObject;
+		
+		smokePuff.particleSystem.startColor = this.GetComponent<SpriteRenderer>().color;
+	}
+	
 	void UpdateSprite(){
 		int spriteIndex = timesHit - 1;
 		if(hitSprites[spriteIndex]){
 			this.GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+		}
+		else{
+			Debug.LogError("Missing damage sprite for brick '" + this.name + "' for damage level: " + timesHit);
 		}
 
 	
